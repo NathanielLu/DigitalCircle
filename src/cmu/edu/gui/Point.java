@@ -11,8 +11,9 @@ public class Point extends JPanel {
     private int squareH = 10;
 
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); // do your superclass's painting routine first, and then paint on top of it.
+        super.paintComponent(g);
         g.setColor(Color.GRAY);
         g.fillRect(squareX,squareY,squareW,squareH);
+        System.out.println("PPPP1");
     }
 }
