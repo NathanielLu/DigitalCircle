@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class CircleGenerator extends CirclePainter{
 
     private static final int LEAST_POINT_NUM = 3;
@@ -13,12 +11,21 @@ public class CircleGenerator extends CirclePainter{
 
     private List<Point> toggledPoints = new ArrayList<>();
 
+    /**
+     * when user click the point, the point should be toggle on or off
+     * @param x
+     * @param y
+     */
     @Override
     public void press(int x, int y) {
         toggledPoints.add(new Point(x, y));
         listener.togglePoint(x, y);
     }
 
+    /**
+     * generate the circle based on the toggled points
+     * using the least squares-based algorithm
+     */
     public void generateCircle() {
         if (toggledPoints.size() < LEAST_POINT_NUM) {
             listener.alert(ALERT_MSG);
@@ -28,12 +35,20 @@ public class CircleGenerator extends CirclePainter{
         listener.drawCircle(circle.centerX, circle.centerY, circle.r, Color.BLUE);
     }
 
+    /**
+     * clear all the toggled points
+     */
     public void reset() {
         listener.clear();
         toggledPoints.clear();
     }
 
 
+    /**
+     * the least squares-based algorithm using the calculation
+     * @param points
+     * @return
+     */
     private Circle generateCircleHelper(List<Point> points) {
         // TODO: calculate R from toggle points
 

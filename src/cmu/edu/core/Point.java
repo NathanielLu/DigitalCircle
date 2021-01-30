@@ -1,6 +1,10 @@
 package cmu.edu.core;
 
+/**
+ * class for the point on the frame
+ */
 public class Point {
+
     private int x;
     private int y;
 
