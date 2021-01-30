@@ -26,6 +26,15 @@ public class CircleGenerator extends CirclePainter{
      * generate the circle based on the toggled points
      * using the least squares-based algorithm
      */
+    @Override
+    public void generate(){
+        generateCircle();
+    }
+
+    /**
+     * generate the circle based on the toggled points
+     * using the least squares-based algorithm
+     */
     public void generateCircle() {
         if (toggledPoints.size() < LEAST_POINT_NUM) {
             listener.alert(ALERT_MSG);

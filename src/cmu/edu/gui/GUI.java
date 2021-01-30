@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.io.IOException;
 
 public class GUI {
@@ -37,9 +37,25 @@ public class GUI {
             System.out.println("digitizer button clicked\n");
             CirclePainter painter = new CircleDigitizer();
             PainterPanel panel = new PainterPanel(painter);
+
+            panel.setLayout(new BorderLayout());
+
+            JPanel downPanel = new JPanel();
+            downPanel.setLayout(new GridLayout(1, 2));
+            JButton clear = new JButton("Clear");
+            JButton back = new JButton("Back");
+
+            clear.addActionListener(click ->{
+                painter.reset();
+            });
+
+            downPanel.add(clear);
+            downPanel.add(back);
+            panel.add(downPanel, BorderLayout.SOUTH);
+
             panel.setOpaque(true);
             frame.setContentPane(panel);
-            frame.setSize(400, 400);
+            frame.setSize(400, 450);
             frame.setResizable(false);
 //            frame.pack();
             frame.setVisible(true);
@@ -49,9 +65,33 @@ public class GUI {
             System.out.println("generator button clicked\n");
             CirclePainter painter = new CircleGenerator();
             PainterPanel panel = new PainterPanel(painter);
+
+            panel.setLayout(new BorderLayout());
+
+            JPanel downPanel = new JPanel();
+            downPanel.setLayout(new GridLayout(1, 3));
+
+            JButton generate = new JButton("Generate");
+            JButton clear = new JButton("Clear");
+            JButton back = new JButton("Back");
+
+            generate.addActionListener(mouse -> {
+                painter.generate();
+            });
+
+            clear.addActionListener(click ->{
+                painter.reset();
+            });
+
+            downPanel.add(generate);
+            downPanel.add(clear);
+            downPanel.add(back);
+
+            panel.add(downPanel, BorderLayout.SOUTH);
+
             panel.setOpaque(true);
             frame.setContentPane(panel);
-            frame.setSize(400, 400);
+            frame.setSize(400, 450);
             frame.setResizable(false);
 //            frame.pack();
             frame.setVisible(true);

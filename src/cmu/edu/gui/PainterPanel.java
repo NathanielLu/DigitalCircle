@@ -129,7 +129,25 @@ public class PainterPanel extends JPanel implements Listener{
 
     @Override
     public void clear() {
+        for(SquarePoint[] sps: squarePoints){
+            for(SquarePoint sp: sps){
+                sp.c = Color.GRAY;
+                sp.draw(getGraphics());
+            }
+        }
 
+        List<Shape> list = new ArrayList<>();
+
+        for(Shape shape: shapes){
+            if(shape instanceof SquarePoint){
+                ((SquarePoint) shape).c = Color.GRAY;
+                list.add(shape);
+            }
+        }
+        shapes = list;
+        for (Shape shape : shapes) {
+            shape.draw(getGraphics());
+        }
     }
 
     @Override

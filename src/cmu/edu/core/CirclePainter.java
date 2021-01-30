@@ -22,5 +22,6 @@ public abstract class CirclePainter {
         listener.clear();
     }
 
+    public void generate() {return;}
 
 }
