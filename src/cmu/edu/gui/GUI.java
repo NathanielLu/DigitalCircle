@@ -33,6 +33,7 @@ public class GUI {
         JButton digitizerButton = new JButton("Digitize");
         JButton generatorButton = new JButton("Generate");
 
+        // digital circle
         digitizerButton.addActionListener(e -> {
             System.out.println("digitizer button clicked\n");
             CirclePainter painter = new CircleDigitizer();
@@ -41,7 +42,7 @@ public class GUI {
             panel.setLayout(new BorderLayout());
 
             JPanel downPanel = new JPanel();
-            downPanel.setLayout(new GridLayout(1, 2));
+            downPanel.setLayout(new GridLayout(1, 1));
             JButton clear = new JButton("Clear");
             JButton back = new JButton("Back");
 
@@ -50,7 +51,7 @@ public class GUI {
             });
 
             downPanel.add(clear);
-            downPanel.add(back);
+//            downPanel.add(back);
             panel.add(downPanel, BorderLayout.SOUTH);
 
             panel.setOpaque(true);
@@ -61,6 +62,7 @@ public class GUI {
             frame.setVisible(true);
         });
 
+        // circle generate
         generatorButton.addActionListener(e -> {
             System.out.println("generator button clicked\n");
             CirclePainter painter = new CircleGenerator();
@@ -69,7 +71,7 @@ public class GUI {
             panel.setLayout(new BorderLayout());
 
             JPanel downPanel = new JPanel();
-            downPanel.setLayout(new GridLayout(1, 3));
+            downPanel.setLayout(new GridLayout(1, 2));
 
             JButton generate = new JButton("Generate");
             JButton clear = new JButton("Clear");
@@ -85,7 +87,7 @@ public class GUI {
 
             downPanel.add(generate);
             downPanel.add(clear);
-            downPanel.add(back);
+//            downPanel.add(back);
 
             panel.add(downPanel, BorderLayout.SOUTH);
 

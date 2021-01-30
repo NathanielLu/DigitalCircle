@@ -61,44 +61,41 @@ public class CircleGenerator extends CirclePainter{
     private Circle generateCircleHelper(List<Point> points) {
         // TODO: calculate R from toggle points
 
-        double sum_x = 0.0f, sum_y = 0.0f;
-        double sum_x2 = 0.0f, sum_y2 = 0.0f;
-        double sum_x3 = 0.0f, sum_y3 = 0.0f;
-        double sum_xy = 0.0f, sum_x1y2 = 0.0f, sum_x2y1 = 0.0f;
+        double sumX = 0, sumY = 0;
+        double sumX2 = 0, sumY2 = 0;
+        double sumX3 = 0, sumY3 = 0;
+        double sumXY = 0, sumX1Y2 = 0, sumX2Y1 = 0;
 
         int N = points.size();
         for (int i = 0; i < N; i++) {
             double x = points.get(i).x();
             double y = points.get(i).y();
-            double x2 = x * x;
-            double y2 = y * y;
-            sum_x += x;
-            sum_y += y;
-            sum_x2 += x2;
-            sum_y2 += y2;
-            sum_x3 += x2 * x;
-            sum_y3 += y2 * y;
-            sum_xy += x * y;
-            sum_x1y2 += x * y2;
-            sum_x2y1 += x2 * y;
+            sumX += x;
+            sumY += y;
+            sumX2 += x * x;
+            sumY2 += y * y;
+            sumX3 += x * x * x;
+            sumY3 += y * y * y;
+            sumXY += x * y;
+            sumX1Y2 += x * y * y;
+            sumX2Y1 += x * x * y;
         }
 
-        double C, D, E, G, H;
-        double a, b, c;
+        double tmp1, tmp2, tmp3, tmp4, tmp5, a, b, c;
 
-        C = N * sum_x2 - sum_x * sum_x;
-        D = N * sum_xy - sum_x * sum_y;
-        E = N * sum_x3 + N * sum_x1y2 - (sum_x2 + sum_y2) * sum_x;
-        G = N * sum_y2 - sum_y * sum_y;
-        H = N * sum_x2y1 + N * sum_y3 - (sum_x2 + sum_y2) * sum_y;
-        a = (H * D - E * G) / (C * G - D * D);
-        b = (H * C - E * D) / (D * D - G * C);
-        c = -(a * sum_x + b * sum_y + sum_x2 + sum_y2) / N;
+        tmp1 = N * sumX2 - sumX * sumX;
+        tmp2 = N * sumXY - sumX * sumY;
+        tmp3 = N * sumX3 + N * sumX1Y2 - (sumX2 + sumY2) * sumX;
+        tmp4 = N * sumY2 - sumY * sumY;
+        tmp5 = N * sumX2Y1 + N * sumY3 - (sumX2 + sumY2) * sumY;
+        a = (tmp5 * tmp2 - tmp3 * tmp4) / (tmp1 * tmp4 - tmp2 * tmp2);
+        b = (tmp5 * tmp1 - tmp3 * tmp2) / (tmp2 * tmp2 - tmp4 * tmp1);
+        c = -(a * sumX + b * sumY + sumX2 + sumY2) / N;
 
-        double center_x = a / (-2);
-        double center_y = b / (-2);
+        double centerX = a / (-2);
+        double centerY = b / (-2);
         double radius = Math.sqrt(a * a + b * b - 4 * c) / 2;
-        return new Circle((int)center_x, (int)center_y, (int)radius);
+        return new Circle((int)centerX, (int)centerY, (int)radius);
     }
 
     class Circle {

@@ -55,7 +55,7 @@ public class CircleDigitizer extends CirclePainter {
             if(idx < 0){
                 idx = -idx - 1;
             }
-            double left = possible - values.get(idx - 1);
+            double left = possible - values.get(idx-1);
             double right = values.get(idx) - possible;
 
 
@@ -136,7 +136,16 @@ public class CircleDigitizer extends CirclePainter {
         }
 
         for(Point p: set){
-            points.add(p);
+            boolean found = false;
+            for(Point tmp: points){
+                if(tmp.x() == p.x() && tmp.y() == p.y()){
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                points.add(p);
+            }
         }
 
         return points;

@@ -24,4 +24,8 @@ public class Point {
     public String toString(){
         return "Point("+x+","+y+")";
     }
+
+    public boolean equals(Point p){
+        return p.x() == this.x && p.y() == this.y;
+    }
 }
