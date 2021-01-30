@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f7601ea1-9c0a-4aa5-a46b-03c5c21a353b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/cmu/edu/gui/Circle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DigitalCircle/cmu/edu/gui/CirclePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DigitalCircle/cmu/edu/gui/CirclePanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DigitalCircle/cmu/edu/gui/CirclePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DigitalCircle/cmu/edu/gui/CirclePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmu/edu/gui/CirclePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmu/edu/gui/CirclePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmu/edu/gui/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmu/edu/gui/Point.java" afterDir="false" />
-    </list>
+    <list default="true" id="f7601ea1-9c0a-4aa5-a46b-03c5c21a353b" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,8 +15,8 @@
       <file leaf-file-name="CirclePanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cmu/edu/gui/CirclePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="32" column="49" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
+            <state relative-caret-position="332">
+              <caret line="78" column="5" lean-forward="true" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2450#2451#0" expanded="true" />
@@ -80,8 +73,8 @@
       <file leaf-file-name="Circle.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cmu/edu/gui/Circle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="24" column="47" lean-forward="true" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
+            <state relative-caret-position="200">
+              <caret line="18" column="21" lean-forward="true" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -369,12 +362,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1611951618533</updated>
-      <workItem from="1611951652962" duration="12070000" />
+      <workItem from="1611951652962" duration="12483000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12070000" />
+    <option name="totallyTimeSpent" value="12483000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="23" width="1440" height="829" extended-state="0" />
@@ -524,8 +517,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cmu/edu/gui/Circle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="24" column="47" lean-forward="true" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
+        <state relative-caret-position="200">
+          <caret line="18" column="21" lean-forward="true" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -534,8 +527,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cmu/edu/gui/CirclePanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="32" column="49" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
+        <state relative-caret-position="332">
+          <caret line="78" column="5" lean-forward="true" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2450#2451#0" expanded="true" />
