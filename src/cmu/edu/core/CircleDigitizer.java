@@ -16,10 +16,10 @@ public class CircleDigitizer extends CirclePainter {
             int minR = radius, maxR = radius;
             for (Point p : points) {
                 int r = Utils.getRadius(lastClickPoint, p);
-                if (r + 2 > maxR)
-                    maxR = r + 2;
-                if (r - 2 < minR)
-                    minR = r - 2;
+                if (r > maxR)
+                    maxR = r;
+                if (r < minR)
+                    minR = r;
                 //Toggle points
                 listener.togglePoint(p.x(), p.y());
             }
@@ -33,92 +33,82 @@ public class CircleDigitizer extends CirclePainter {
         }
     }
 
+    private Point getNearestPoint(List<Double> values, double possible, int i, boolean flag){
+        if (possible >= 10 && possible <= 390) {
+            int idx = Collections.binarySearch(values, possible);
+            if(idx < 0){
+                idx = -idx - 1;
+            }
+            double left = possible - values.get(idx - 1);
+            double right = values.get(idx) - possible;
+            if(flag){
+                if(left < right){
+                    return new Point((int)(values.get(idx - 1).doubleValue()), i);
+                }else{
+                    return new Point((int)(values.get(idx).doubleValue()), i);
+                }
+            }else {
+                if (left < right) {
+                    return new Point(i, (int) (values.get(idx - 1).doubleValue()));
+                } else {
+                    return new Point(i, (int) (values.get(idx).doubleValue()));
+                }
+            }
+        }
+        return null;
+    }
 
     private List<Point> getClosestPoints(Point centerPoint, Point edgePoint) {
         List<Point> points = new ArrayList<>();
         // TODO: get closest approximation points
 
         double radius = Utils.getRadius(centerPoint, edgePoint);
+        int centerX = centerPoint.x();
+        int centerY = centerPoint.y();
 
-        Map<Point, Double> nearPoints = new HashMap<>();
+        Set<Point> set = new HashSet<>();
 
-        for(int i=0; i<20; i++){
-            int y = 10 + 20 * i;
-            if(Math.abs(y - centerPoint.y()) > radius + 15 || Math.abs(y - centerPoint.y()) < radius - 15){
-                continue;
-            }
-            for(int j=0; j<20; j++){
-                int x = 10 + 20 * j;
-                if(Math.abs(x - centerPoint.x()) > radius + 15 || Math.abs(x - centerPoint.x()) < radius - 15){
-                    continue;
+        List<Double> values = new ArrayList<>();
+        for(int i=10; i<=390; i+=20){
+            values.add(i*1.0);
+        }
+
+        // horizontal lines
+        for(int i=10; i<=390; i+=20){
+            if(centerY - radius <= i && i <= centerY + radius) {
+                double possibleX1 = centerX + Math.sqrt(radius * radius - (centerY - i) * (centerY - i));
+                double possibleX2 = centerX - Math.sqrt(radius * radius - (centerY - i) * (centerY - i));
+
+                Point p = getNearestPoint(values, possibleX1, i, true);
+                if(p != null){
+                    set.add(p);
                 }
-                double distance = Utils.getDistance(new Point(x, y), centerPoint, radius);
-                nearPoints.put(new Point(x, y), distance);
-            }
-        }
-
-        System.out.println(nearPoints);
-
-        PriorityQueue<Point> queue = new PriorityQueue<>(new Comparator<>(){
-            public int compare(Point a, Point b){
-                double cal = nearPoints.get(a) - nearPoints.get(b);
-                if(cal < 0){
-                    return -1;
-                }else if(cal > 0){
-                    return 1;
+                Point p2 = getNearestPoint(values, possibleX2, i, true);
+                if(p2 != null){
+                    set.add(p2);
                 }
-                return 0;
             }
-        });
-        for(Point p: nearPoints.keySet()){
-            queue.add(p);
         }
 
-        Set<Integer> tobeDeleteRows = new HashSet<>();
-        Set<Integer> tobeDeleteCols = new HashSet<>();
+        // vertical lines
+        for(int i=10; i<=390; i+=20){
+            if(centerX - radius <= i && i <= centerX + radius){
+                double possibleY1 = centerY + Math.sqrt(radius * radius - (centerX - i)* (centerX - i));
+                double possibleY2 = centerY - Math.sqrt(radius * radius - (centerX - i)* (centerX - i));
 
-        double leftX = Math.max(centerPoint.x() - radius, 10);
-        double rightX = Math.min(centerPoint.x() + radius, 390);
-        double topY = Math.max(centerPoint.y() - radius, 10);
-        double downY = Math.min(centerPoint.y() + radius, 390);
-
-        if((int)(leftX-10) / 20 * 20 != (leftX-10)){
-            leftX = Math.max((int)(leftX-10) / 20 * 20 + 10, 10);
-        }
-
-        if((int)(rightX-10) / 20 * 20 != (rightX-10)){
-            rightX = Math.min((int)(rightX-10) / 20 * 20 + 30, 390);
-        }
-
-        if((int)(topY-10) / 20 * 20 != (topY-10)){
-            topY = Math.max((int)(topY-10) / 20 * 20 + 10, 10);
-        }
-
-        if((int)(downY-10) / 20 * 20 != (downY-10)){
-            downY = Math.min((int)(downY-10) / 20 * 20 + 30, 390);
-        }
-
-        for(int x=(int)leftX; x<=rightX; x+=20){
-            tobeDeleteCols.add(x);
-        }
-
-        for(int y=(int)topY; y<=downY; y+=20){
-            tobeDeleteRows.add(y);
-        }
-
-        System.out.println(tobeDeleteRows);
-        System.out.println(tobeDeleteCols);
-        System.out.println(queue.size());
-
-        while(tobeDeleteCols.size() > 0  || tobeDeleteRows.size() > 0){
-            if(!queue.isEmpty()){
-                Point tmp = queue.poll();
-                tobeDeleteCols.remove(tmp.x());
-                tobeDeleteRows.remove(tmp.y());
-                points.add(tmp);
-            }else{
-                break;
+                Point p = getNearestPoint(values, possibleY1, i, false);
+                if(p != null){
+                    set.add(p);
+                }
+                Point p2 = getNearestPoint(values, possibleY2, i, false);
+                if(p2 != null){
+                    set.add(p2);
+                }
             }
+        }
+
+        for(Point p: set){
+            points.add(p);
         }
 
         return points;
