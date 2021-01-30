@@ -36,15 +36,15 @@ public class CircleGenerator extends CirclePainter{
 
     private Circle generateCircleHelper(List<Point> points) {
         // TODO: calculate R from toggle points
-        return new Circle(0, 0, 0.0);
+        return new Circle(0, 0, 0);
     }
 
     class Circle {
         int centerX;
         int centerY;
-        double r;
+        int r;
 
-        public Circle(int x, int y, double r) {
+        public Circle(int x, int y, int r) {
             centerX = x;
             centerY = y;
             this.r = r;

@@ -39,7 +39,9 @@ public class GUI {
             PainterPanel panel = new PainterPanel(painter);
             panel.setOpaque(true);
             frame.setContentPane(panel);
-            frame.pack();
+            frame.setSize(400, 400);
+            frame.setResizable(false);
+//            frame.pack();
             frame.setVisible(true);
         });
 
@@ -49,7 +51,9 @@ public class GUI {
             PainterPanel panel = new PainterPanel(painter);
             panel.setOpaque(true);
             frame.setContentPane(panel);
-            frame.pack();
+            frame.setSize(400, 400);
+            frame.setResizable(false);
+//            frame.pack();
             frame.setVisible(true);
         });
 

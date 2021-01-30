@@ -5,14 +5,70 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.*;
+import java.util.List;
 
 public class PainterPanel extends JPanel implements Listener{
 
     private final CirclePainter painter;
 
+    private SquarePoint[][] squarePoints;
+
+    interface Shape {
+        void draw(Graphics g);
+    }
+
+    class SquarePoint implements Shape {
+        int x;
+        int y;
+        Color c;
+        public SquarePoint(int x, int y, Color c) {
+            this.x = x;
+            this.y = y;
+            this.c = c;
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            g.setColor(c);
+            g.fillRect(x - 2, y - 2,4, 4);
+        }
+    }
+
+    class Circle implements Shape {
+        int x;
+        int y;
+        int r;
+        Color c;
+        public Circle(int x, int y, int r, Color c) {
+            this.x = x;
+            this.y = y;
+            this.r = r;
+        }
+
+        public void draw(Graphics g) {
+            g.setColor(c);
+            g.drawOval(x - r, y - r, 2 * r, 2 * r);
+        }
+    }
+
+    private List<Shape> shapes = new ArrayList<>();
+
     public PainterPanel(CirclePainter painter) {
         this.painter = painter;
         painter.setListener(this);
+
+        //set background square points
+        squarePoints = new SquarePoint[20][20];
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                int x = 10 + 20 * i;
+                int y = 10 + 20 * j;
+                SquarePoint sp = new SquarePoint(x, y, Color.GRAY);
+                squarePoints[i][j] = sp;
+                shapes.add(sp);
+            }
+        }
 
         addMouseListener(new MouseAdapter() {
 
@@ -27,6 +83,8 @@ public class PainterPanel extends JPanel implements Listener{
                     startX = x;
                     startY = y;
                     System.out.println("The mouse is clicking: " + x + " , " + y);
+
+                    painter.press(x, y);
                 }
             }
 
@@ -35,7 +93,8 @@ public class PainterPanel extends JPanel implements Listener{
                 int x = e.getX();
                 int y = e.getY();
                 System.out.println("The mouse is releasing: " + x + " , " + y);
-//                drawCircle(startX, startY, x, y);
+
+                painter.release(x, y);
             }
         });
     }
@@ -44,62 +103,27 @@ public class PainterPanel extends JPanel implements Listener{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        drawRect(g);
-        drawOval(g);
-    }
-
-    private void drawRect(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g.create();
-
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(Color.GRAY);
-
-        // 1. 绘制一个矩形: 起点(30, 20), 宽80, 高100
-        g2d.drawRect(30, 20, 80, 100);
-
-        // 2. 填充一个矩形
-        g2d.fillRect(140, 20, 80, 100);
-
-        // 3. 绘制一个圆角矩形: 起点(30, 150), 宽80, 高100, 圆角宽30, 圆角高30
-        g2d.drawRoundRect(30, 150, 80, 100, 30, 30);
-
-        // 4. 绘制一个多边形(收尾相连): 点(140, 150), 点(180, 250), 点(220, 200)
-        int[] xPoints = new int[] { 140, 180, 220};
-        int[] yPoints = new int[] { 150,  250, 200};
-        int nPoints = 3;
-        g2d.drawPolygon(xPoints, yPoints, nPoints);
-
-        g2d.dispose();
-    }
-
-    private void drawOval(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g.create();
-
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(Color.RED);
-
-        // 1. 绘制一个圆: 圆的外切矩形 左上角坐标为(0, 0), 宽高为100
-        g2d.drawOval(0, 0, 100, 100);
-
-        g2d.setColor(Color.GRAY);
-        g2d.drawOval(50, 50, 100, 100);
-
-        g2d.setColor(Color.BLUE);
-
-        // 2. 填充一个椭圆
-        g2d.fillOval(120, 100, 100, 150);
-
-        g2d.dispose();
+        for (Shape shape : shapes) {
+            shape.draw(g);
+        }
     }
 
     @Override
-    public void drawCircle(int x, int y, double r, Color color) {
-
+    public void drawCircle(int x, int y, int r, Color color) {
+        Circle circle = new Circle(x, y, r, color);
+        shapes.add(circle);
+        circle.draw(getGraphics());
     }
 
     @Override
     public void togglePoint(int x, int y) {
-
+        if ((x % 20) < 8 || (x % 20) > 12) return;
+        if ((y % 20) < 8 || (y % 20) > 12) return;
+//        SquarePoint sp = new SquarePoint(x / 20 * 20 + 10, y / 20 * 20 + 10);
+//        int idx = y / 20 * 20 + x / 20;
+        SquarePoint sp = squarePoints[y / 20][x / 20];
+        sp.c = sp.c.equals(Color.GRAY) ? Color.BLUE : Color.GRAY;
+        sp.draw(getGraphics());
     }
 
     @Override

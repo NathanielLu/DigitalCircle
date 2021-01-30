@@ -32,6 +32,8 @@ public class huatu extends JFrame{
     int endy=0;
     //判断是否是第一次绘图
     boolean firsthui =false;
+
+
     public void paint(Graphics g){
 //g=aa.getGraphics();
         it=list.iterator();
@@ -43,6 +45,8 @@ public class huatu extends JFrame{
         }
 //g.drawLine(10, 10, 100, 100);
     }
+
+
     //构造函数
     public huatu(){
         init();
@@ -114,6 +118,8 @@ public class huatu extends JFrame{
 //this.setResizable(false);
         this.setVisible(true);
     }
+
+
     class huatuMouseLisner implements MouseListener{
         public void mouseClicked(MouseEvent arg0) {
 // TODO Auto-generated method stub
@@ -172,6 +178,7 @@ public class huatu extends JFrame{
                     g.drawLine(startx, starty, endx, endy);
                 }
                     break;
+
                 case 2: if(firsthui==true){
                     endx=e.getX();
                     endy=e.getY();

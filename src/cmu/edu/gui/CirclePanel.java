@@ -23,21 +23,21 @@ public class CirclePanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         panel = new JPanel();
-//        panel.setLayout(new GridLayout(20, 20, 10,10));
+        panel.setLayout(new GridLayout(20, 20, 10,10));
 //
-//        for(int i=0; i<400; i++){
-//            Point button = new Point();
-//            panel.add(button);
-//        }
+        for(int i=0; i<400; i++){
+            Point button = new Point();
+            panel.add(button);
+        }
 
-//        Circle circle = new Circle(20, 20, 20, 20);
-//        panel.add(circle);
+        Circle circle = new Circle(20, 20, 20, 20);
+        panel.add(circle);
 
 
-//        for(int i=0; i<20; i++){
-//            Point button = new Point();
-//            panel.add(button);
-//        }
+        for(int i=0; i<20; i++){
+            Point button = new Point();
+            panel.add(button);
+        }
 
         panel.addMouseListener(new MouseAdapter() {
 
@@ -64,7 +64,7 @@ public class CirclePanel {
             }
         });
 
-        Circle circle = new Circle(200, 200, 240, 240);
+//        Circle circle = new Circle(200, 200, 240, 240);
         frame.add(circle);
 //        frame.pack();
         frame.setVisible(true);

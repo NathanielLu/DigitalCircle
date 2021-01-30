@@ -1,10 +1,10 @@
 package cmu.edu.core;
 
 public class Utils {
-    public static double getRadius(Point a, Point b) {
+    public static int getRadius(Point a, Point b) {
         double dx = a.x() - b.x();
         double dy = a.y() - b.y();
-        return Math.sqrt(dx * dx + dy * dy);
+        return (int)Math.sqrt(dx * dx + dy * dy);
     }
 
     public static double getDistance(Point a, Point b, double radius){

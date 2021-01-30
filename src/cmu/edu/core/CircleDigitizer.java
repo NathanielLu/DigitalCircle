@@ -10,15 +10,14 @@ public class CircleDigitizer extends CirclePainter {
             Point newPoint = new Point(x, y);
             List<Point> points = getClosestPoints(lastClickPoint, newPoint);
 
-            double radius = Utils.getRadius(lastClickPoint, newPoint);
-            double minR = radius, maxR = radius;
+            int radius = Utils.getRadius(lastClickPoint, newPoint);
+            int minR = radius, maxR = radius;
             for (Point p : points) {
-                double r = Utils.getRadius(lastClickPoint, p);
+                int r = Utils.getRadius(lastClickPoint, p);
                 if (r > maxR)
                     maxR = r;
                 else if (r < minR)
                     minR = r;
-
                 //Toggle points
                 listener.togglePoint(p.x(), p.y());
             }
@@ -40,13 +39,13 @@ public class CircleDigitizer extends CirclePainter {
         Map<Point, Double> nearPoints = new HashMap<>();
 
         for(int i=0; i<20; i++){
-            int y = 10 * i;
-            if(Math.abs(y - centerPoint.y()) > radius + 10 || Math.abs(y - centerPoint.y()) < radius - 10){
+            int y = 20 * i;
+            if(Math.abs(y - centerPoint.y()) > radius + 20 || Math.abs(y - centerPoint.y()) < radius - 20){
                 continue;
             }
             for(int j=0; j<20; j++){
-                int x = 10 * j;
-                if(Math.abs(x - centerPoint.x()) > radius + 10 || Math.abs(x - centerPoint.x()) < radius - 10){
+                int x = 20 * j;
+                if(Math.abs(x - centerPoint.x()) > radius + 20 || Math.abs(x - centerPoint.x()) < radius - 20){
                     continue;
                 }
                 double distance = Utils.getDistance(new Point(x, y), centerPoint, radius);
@@ -73,9 +72,9 @@ public class CircleDigitizer extends CirclePainter {
         Set<Integer> tobeDeleteCols = new HashSet<>();
 
         double leftX = Math.max(centerPoint.x() - radius, 0);
-        double rightX = Math.min(centerPoint.x() + radius, 190);
+        double rightX = Math.min(centerPoint.x() + radius, 400);
         double topY = Math.max(centerPoint.y() - radius, 0);
-        double downY = Math.min(centerPoint.y() + radius, 190);
+        double downY = Math.min(centerPoint.y() + radius, 400);
 
         if(rightX != (int)rightX){
             rightX++;
