@@ -44,6 +44,7 @@ public class PainterPanel extends JPanel implements Listener{
             this.x = x;
             this.y = y;
             this.r = r;
+            this.c = c;
         }
 
         public void draw(Graphics g) {
@@ -117,11 +118,11 @@ public class PainterPanel extends JPanel implements Listener{
 
     @Override
     public void togglePoint(int x, int y) {
-        if ((x % 20) < 8 || (x % 20) > 12) return;
-        if ((y % 20) < 8 || (y % 20) > 12) return;
+        if ((x % 20) < 5 || (x % 20) > 15) return;
+        if ((y % 20) < 5 || (y % 20) > 15) return;
 //        SquarePoint sp = new SquarePoint(x / 20 * 20 + 10, y / 20 * 20 + 10);
 //        int idx = y / 20 * 20 + x / 20;
-        SquarePoint sp = squarePoints[y / 20][x / 20];
+        SquarePoint sp = squarePoints[x / 20][y / 20];
         sp.c = sp.c.equals(Color.GRAY) ? Color.BLUE : Color.GRAY;
         sp.draw(getGraphics());
     }
